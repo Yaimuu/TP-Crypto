@@ -7,7 +7,13 @@
 
 public class Ceeeeaaaasaaaaaarrr implements Crypto
 {
+	private int cle;
 	
+	public void setCle(int cle) 
+	{
+		this.cle = cle;
+	}
+
 	public Ceeeeaaaasaaaaaarrr() 
 	{
 		super();

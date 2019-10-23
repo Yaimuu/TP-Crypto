@@ -58,17 +58,16 @@ public class Server
 	
 	public boolean soumettrePhrase(String phrase, int indice)
 	{
-		this.text.add(indice, phrase);
-		return false;
+		return this.text.get(indice) == phrase;
 	}
 	
 	public boolean soumettreCle(String cle)
 	{
-		return false;
+		return this.cleChoisieStr == cle;
 	}
 	
 	public boolean soumettreCle(int cle)
 	{
-		return false;
+		return this.cleChoisieNum == cle;
 	}
 }

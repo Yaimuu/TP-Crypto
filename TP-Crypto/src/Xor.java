@@ -6,6 +6,12 @@
 
 public class Xor implements Crypto
 {
+	private int cle;
+	
+	public void setCle(int cle) 
+	{
+		this.cle = cle;
+	}
 	
 	public Xor() 
 	{

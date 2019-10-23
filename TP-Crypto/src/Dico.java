@@ -6,6 +6,11 @@
 
 public class Dico implements Crypto
 {
+	private String cle;
+	
+	public void setCle(String cle) {
+		this.cle = cle;
+	}
 	
 	public Dico() 
 	{
