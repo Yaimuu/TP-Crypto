@@ -8,11 +8,22 @@ public class Xor implements Crypto
 {
 	private int cle;
 	
+	@Override
 	public void setCle(int cle) 
 	{
+		if(cle == 0)
+		{
+			cle++;
+		}
 		this.cle = cle;
 	}
 	
+	@Override
+	public void setCle(String cle) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public Xor() 
 	{
 		super();

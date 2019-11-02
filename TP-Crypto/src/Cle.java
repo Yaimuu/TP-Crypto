@@ -6,9 +6,14 @@
 
 public class Cle 
 {
-	public static char[] alphabet = "ABCDEFGHIJKLMOPQRSTUVWXYZ".toCharArray();
+	public static final int MIN_UP = 65;
+	public static final int MAX_UP = 90;
+	public static final int MIN_LOW = 97;
+	public static final int MAX_LOW = 122;
 	
-	private static char[] obtenirCleCar(int nbCars)
+	public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+	
+	public static char[] obtenirCleCar(int nbCars)
 	{
 		char[] key = new char[nbCars];
 		
@@ -21,9 +26,9 @@ public class Cle
 		return key;
 	}
 	
-	private static int obtenirCleNum(int max)
+	public static int obtenirCleNum(int max)
 	{
-		int random = (int)(Math.random() * max + 1);
+		int random = (int)(Math.random() * max + 2);
 		return random;
 	}
 	

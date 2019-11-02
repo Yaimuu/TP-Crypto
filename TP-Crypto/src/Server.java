@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class Server 
 {
 	private ArrayList<String> text;
-	private String cleChoisieStr;
+	private char[] cleChoisieStr;
 	private int cleChoisieNum;
 	private ArrayList<Crypto> algorithmes;
+	private int rand;
+	private int algoChoosed;
 
 	public Server(String fileName) throws IOException 
 	{
@@ -32,25 +34,35 @@ public class Server
 		}
 		br.close();
 		
-		this.cleChoisieStr = "";
-		this.cleChoisieNum = 0;
-		
 		this.algorithmes = new ArrayList<Crypto>();
 		this.algorithmes.add(new Ceeeeaaaasaaaaaarrr());
 		this.algorithmes.add(new Vigenere());
 		this.algorithmes.add(new Xor());
 		this.algorithmes.add(new Dico());
+		
+		rand = (int)(Math.random() * Cle.alphabet.length + 1);
+		
+		algoChoosed = rand % this.algorithmes.size();
+		
+		this.cleChoisieStr = Cle.obtenirCleCar(rand);
+		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
 	}
 
 	public ArrayList<String> obtenirFichierEncode() 
 	{
-		int random = (int)(Math.random() * this.algorithmes.size() + 1);
 		ArrayList<String> newText = new ArrayList<String>();
 		
-		newText.add(this.algorithmes.get(random-1).getClass().toString());
+		algoChoosed = 2;
+		
+		newText.add(this.algorithmes.get(algoChoosed-1).getClass().toString());
+		this.algorithmes.get(algoChoosed-1).setCle(this.cleChoisieNum);
+		this.algorithmes.get(algoChoosed-1).setCle(new String(this.cleChoisieStr));
+		
+		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
+		
 		for(String line : text)
 		{
-			newText.add(this.algorithmes.get(random-1).encode(line));
+			newText.add(this.algorithmes.get(algoChoosed-1).encode(line));
 		}
 		
 		return newText;
@@ -63,7 +75,7 @@ public class Server
 	
 	public boolean soumettreCle(String cle)
 	{
-		return this.cleChoisieStr == cle;
+		return this.cleChoisieStr == cle.toCharArray();
 	}
 	
 	public boolean soumettreCle(int cle)

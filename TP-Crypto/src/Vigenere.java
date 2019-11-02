@@ -8,8 +8,17 @@ public class Vigenere implements Crypto
 {
 	private String cle;
 	
-	public void setCle(String cle) {
+	@Override
+	public void setCle(String cle) 
+	{
 		this.cle = cle;
+	}
+
+	@Override
+	public void setCle(int cle) 
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 	public Vigenere() 
@@ -19,16 +28,41 @@ public class Vigenere implements Crypto
 	}
 
 	@Override
-	public String decode(String message) 
+	public String decode(String message)
 	{
 		// TODO Auto-generated method stub
 		return message;
 	}
 
 	@Override
-	public String encode(String message) 
+	public String encode(String message)
 	{
-		// TODO Auto-generated method stub
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			int digit = Crypto.characterVector.get(i);
+			int keyDigit = this.cle.charAt(i % cle.length());
+			
+			if(digit + keyDigit > Cle.MAX_LOW)
+			{
+				digit = Cle.MIN_LOW + ((digit + keyDigit) % Cle.MAX_LOW) - 1;
+			}
+			else if(digit + keyDigit > Cle.MAX_UP && digit < Cle.MIN_LOW)
+			{
+				digit = Cle.MIN_UP + ((digit + keyDigit) % Cle.MAX_UP) - 1;
+			}
+			else
+			{
+				digit += keyDigit;
+			}
+			
+			Crypto.characterVector.set( i, (char)( message.charAt(i) + this.cle.charAt(i % cle.length()) ) );
+		}
+		
+		message = this.vectorToString();
+		
 		return message;
 	}
 	

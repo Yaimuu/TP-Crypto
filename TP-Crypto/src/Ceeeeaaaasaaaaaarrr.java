@@ -9,12 +9,24 @@ public class Ceeeeaaaasaaaaaarrr implements Crypto
 {
 	private int cle;
 	
+	@Override
 	public void setCle(int cle) 
 	{
-		this.cle = cle;
+		if(cle % 26 == 0)
+		{
+			cle++;
+		}
+		this.cle = cle % 26;
 	}
 
-	public Ceeeeaaaasaaaaaarrr() 
+	@Override
+	public void setCle(String cle) 
+	{
+		// Ne fait rien
+		
+	}
+
+	public Ceeeeaaaasaaaaaarrr()
 	{
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,7 +42,32 @@ public class Ceeeeaaaasaaaaaarrr implements Crypto
 	@Override
 	public String encode(String message) 
 	{
-		// TODO Auto-generated method stub
+		// Pas fini
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			int digit = Crypto.characterVector.get(i);
+			
+			if(digit + this.cle > Cle.MAX_LOW)
+			{
+				digit = Cle.MIN_LOW + ((digit + this.cle) % Cle.MAX_LOW) - 1;
+			}
+			else if(digit + this.cle > Cle.MAX_UP && digit < Cle.MIN_LOW)
+			{
+				digit = Cle.MIN_UP + ((digit + this.cle) % Cle.MAX_UP) - 1;
+			}
+			else
+			{
+				digit += this.cle;
+			}
+			
+			Crypto.characterVector.set(i, (char)digit);
+		}
+		
+		message = this.vectorToString();
+		
 		return message;
 	}
 	

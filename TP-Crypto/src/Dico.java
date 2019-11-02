@@ -8,10 +8,18 @@ public class Dico implements Crypto
 {
 	private String cle;
 	
-	public void setCle(String cle) {
+	@Override
+	public void setCle(String cle) 
+	{
 		this.cle = cle;
 	}
 	
+	@Override
+	public void setCle(int cle) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public Dico() 
 	{
 		super();
