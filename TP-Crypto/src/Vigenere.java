@@ -42,23 +42,22 @@ public class Vigenere implements Crypto
 		
 		for(int i = 0; i < Crypto.characterVector.size(); i++)
 		{
-			int digit = Crypto.characterVector.get(i);
-			int keyDigit = this.cle.charAt(i % cle.length());
+			int digit = 0;
+			int keyDigit = this.cle.charAt(i % (this.cle.length())) - Cle.MIN_UP;
+			int newDigit = 0;
 			
-			if(digit + keyDigit > Cle.MAX_LOW)
+			if(message.charAt(i) >= Cle.MIN_LOW) 
 			{
-				digit = Cle.MIN_LOW + ((digit + keyDigit) % Cle.MAX_LOW) - 1;
+				digit = message.charAt(i) - Cle.MIN_LOW;
+				newDigit = (digit + keyDigit) % 26 + Cle.MIN_LOW;
 			}
-			else if(digit + keyDigit > Cle.MAX_UP && digit < Cle.MIN_LOW)
+			else 
 			{
-				digit = Cle.MIN_UP + ((digit + keyDigit) % Cle.MAX_UP) - 1;
-			}
-			else
-			{
-				digit += keyDigit;
+				digit = message.charAt(i) - Cle.MIN_UP;
+				newDigit = (digit + keyDigit) % 26 + Cle.MIN_UP;
 			}
 			
-			Crypto.characterVector.set( i, (char)( message.charAt(i) + this.cle.charAt(i % cle.length()) ) );
+			Crypto.characterVector.set( i, (char)( newDigit ));
 		}
 		
 		message = this.vectorToString();

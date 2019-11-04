@@ -40,7 +40,7 @@ public class Xor implements Crypto
 	@Override
 	public String encode(String message) 
 	{
-		// TODO Auto-generated method stub
+		
 		return message;
 	}
 	

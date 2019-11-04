@@ -44,8 +44,9 @@ public class Server
 		
 		algoChoosed = rand % this.algorithmes.size();
 		
-		this.cleChoisieStr = Cle.obtenirCleCar(rand);
+		//this.cleChoisieStr = Cle.obtenirCleCar(5);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
+		this.cleChoisieStr = "ABCD".toCharArray();
 	}
 
 	public ArrayList<String> obtenirFichierEncode() 
