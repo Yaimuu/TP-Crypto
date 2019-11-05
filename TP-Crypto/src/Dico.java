@@ -11,13 +11,13 @@ public class Dico implements Crypto
 	@Override
 	public void setCle(String cle) 
 	{
-		this.cle = cle;
+		this.cle = new String(Cle.obtenirCleAlphabet());
 	}
 	
 	@Override
-	public void setCle(int cle) {
+	public void setCle(int cle) 
+	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	public Dico() 
@@ -36,7 +36,28 @@ public class Dico implements Crypto
 	@Override
 	public String encode(String message) 
 	{
-		// TODO Auto-generated method stub
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		System.out.println(this.cle);
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			int digit = message.charAt(i);
+			if(message.charAt(i) >= Cle.MIN_LOW) 
+			{
+				digit -= Cle.MIN_LOW;
+			}
+			else 
+			{
+				digit -= Cle.MIN_UP;
+			}
+			
+			char newChar = this.cle.charAt(digit);
+			
+			Crypto.characterVector.set( i, newChar);
+		}
+		
+		message = this.vectorToString();
 		return message;
 	}
 

@@ -6,21 +6,18 @@
 
 public class Xor implements Crypto
 {
-	private int cle;
+	private String cle;
 	
 	@Override
 	public void setCle(int cle) 
 	{
-		if(cle == 0)
-		{
-			cle++;
-		}
-		this.cle = cle;
+		// TODO Auto-generated method stub
 	}
 	
 	@Override
-	public void setCle(String cle) {
-		// TODO Auto-generated method stub
+	public void setCle(String cle) 
+	{
+		this.cle = cle;
 		
 	}
 
@@ -40,6 +37,28 @@ public class Xor implements Crypto
 	@Override
 	public String encode(String message) 
 	{
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			
+			char newChar = (char)((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())) % 26);
+			
+			if(message.charAt(i) >= Cle.MIN_LOW)
+			{
+				newChar += Cle.MIN_LOW;
+			}
+			else
+			{
+				newChar += Cle.MIN_UP;
+			}
+			
+			Crypto.characterVector.set( i, newChar);
+		}
+		
+		message = this.vectorToString();
 		
 		return message;
 	}

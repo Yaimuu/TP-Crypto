@@ -53,7 +53,7 @@ public class Server
 	{
 		ArrayList<String> newText = new ArrayList<String>();
 		
-		algoChoosed = 2;
+		algoChoosed = 4;
 		
 		newText.add(this.algorithmes.get(algoChoosed-1).getClass().toString());
 		this.algorithmes.get(algoChoosed-1).setCle(this.cleChoisieNum);

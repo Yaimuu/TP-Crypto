@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
  * Version : 1.0
@@ -30,6 +32,22 @@ public class Cle
 	{
 		int random = (int)(Math.random() * max + 2);
 		return random;
+	}
+	
+	public static char[] obtenirCleAlphabet()
+	{
+		Random rgen = new Random();  // Random number generator			
+		char[] array = Cle.alphabet;
+		
+		for (int i = 0; i < array.length; i++) 
+		{
+		    int randomPosition = rgen.nextInt(array.length);
+		    int temp = array[i];
+		    array[i] = array[randomPosition];
+		    array[randomPosition] = (char) temp;
+		}
+ 
+		return array;
 	}
 	
 }
