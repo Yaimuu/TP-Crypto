@@ -65,4 +65,10 @@ public class Vigenere implements Crypto
 		return message;
 	}
 	
+	@Override
+	public String obtenirNomAlgo() 
+	{
+		return "Chiffre de Vigenère";
+		
+	}
 }

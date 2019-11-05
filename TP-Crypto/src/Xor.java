@@ -63,4 +63,10 @@ public class Xor implements Crypto
 		return message;
 	}
 	
+	@Override
+	public String obtenirNomAlgo() 
+	{
+		return "Chiffre XOR";
+		
+	}
 }

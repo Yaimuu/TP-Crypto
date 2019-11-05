@@ -44,26 +44,25 @@ public class Server
 		
 		algoChoosed = rand % this.algorithmes.size();
 		
-		//this.cleChoisieStr = Cle.obtenirCleCar(5);
+		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
-		this.cleChoisieStr = "ABCD".toCharArray();
 	}
 
 	public ArrayList<String> obtenirFichierEncode() 
 	{
 		ArrayList<String> newText = new ArrayList<String>();
 		
-		algoChoosed = 4;
+		//algoChoosed = 3;
 		
-		newText.add(this.algorithmes.get(algoChoosed-1).getClass().toString());
-		this.algorithmes.get(algoChoosed-1).setCle(this.cleChoisieNum);
-		this.algorithmes.get(algoChoosed-1).setCle(new String(this.cleChoisieStr));
+		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
+		this.algorithmes.get(algoChoosed).setCle(this.cleChoisieNum);
+		this.algorithmes.get(algoChoosed).setCle(new String(this.cleChoisieStr));
 		
-		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
+		//System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
 		
 		for(String line : text)
 		{
-			newText.add(this.algorithmes.get(algoChoosed-1).encode(line));
+			newText.add(this.algorithmes.get(algoChoosed).encode(line));
 		}
 		
 		return newText;

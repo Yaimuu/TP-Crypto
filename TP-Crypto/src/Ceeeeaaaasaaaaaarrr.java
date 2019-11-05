@@ -42,7 +42,6 @@ public class Ceeeeaaaasaaaaaarrr implements Crypto
 	@Override
 	public String encode(String message) 
 	{
-		// Pas fini
 		Crypto.characterVector.clear();
 		this.loadMessage(message);
 		
@@ -69,6 +68,13 @@ public class Ceeeeaaaasaaaaaarrr implements Crypto
 		message = this.vectorToString();
 		
 		return message;
+	}
+
+	@Override
+	public String obtenirNomAlgo() 
+	{
+		return "Chiffre de César";
+		
 	}
 	
 }

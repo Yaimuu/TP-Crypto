@@ -37,17 +37,18 @@ public class Cle
 	public static char[] obtenirCleAlphabet()
 	{
 		Random rgen = new Random();  // Random number generator			
-		char[] array = Cle.alphabet;
+		char[] alphabetRes = Cle.alphabet;
 		
-		for (int i = 0; i < array.length; i++) 
+		for (int i = 0; i < alphabetRes.length; i++) 
 		{
-		    int randomPosition = rgen.nextInt(array.length);
-		    int temp = array[i];
-		    array[i] = array[randomPosition];
-		    array[randomPosition] = (char) temp;
+		    int randomPosition = rgen.nextInt(alphabetRes.length);
+		    int temp = alphabetRes[i];
+		    
+		    alphabetRes[randomPosition] = (char) temp;
+		    alphabetRes[i] = alphabetRes[randomPosition];
 		}
- 
-		return array;
+		
+		return alphabetRes;
 	}
 	
 }

@@ -10,7 +10,7 @@ public class Main
 {
 	public static void main(String[] args) throws IOException 
 	{
-		Server s = new Server("texte.txt");
+		Server s = new Server("Shakespeare.txt");
 		for (String string : s. obtenirFichierEncode())
 		{
 			System.out.println(string);

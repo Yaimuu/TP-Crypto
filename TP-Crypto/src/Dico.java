@@ -39,7 +39,7 @@ public class Dico implements Crypto
 		Crypto.characterVector.clear();
 		this.loadMessage(message);
 		
-		System.out.println(this.cle);
+		//System.out.println(this.cle);
 		for(int i = 0; i < Crypto.characterVector.size(); i++)
 		{
 			int digit = message.charAt(i);
@@ -60,5 +60,11 @@ public class Dico implements Crypto
 		message = this.vectorToString();
 		return message;
 	}
-
+	
+	@Override
+	public String obtenirNomAlgo() 
+	{
+		return "Substitution Alphabétique";
+		
+	}
 }
