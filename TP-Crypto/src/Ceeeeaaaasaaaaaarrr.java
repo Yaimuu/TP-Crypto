@@ -71,10 +71,9 @@ public class Ceeeeaaaasaaaaaarrr implements Crypto
 	}
 
 	@Override
-	public String obtenirNomAlgo() 
+	public String obtenirNomAlgo()
 	{
 		return "Chiffre de César";
-		
 	}
 	
 }

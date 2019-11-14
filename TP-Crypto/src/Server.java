@@ -46,6 +46,12 @@ public class Server
 		
 		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
+		
+		for(Crypto algo : this.algorithmes)
+		{
+			algo.setCle(this.cleChoisieNum);
+			algo.setCle(new String(this.cleChoisieStr));
+		}
 	}
 
 	public ArrayList<String> obtenirFichierEncode() 
@@ -55,8 +61,6 @@ public class Server
 		//algoChoosed = 3;
 		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
-		this.algorithmes.get(algoChoosed).setCle(this.cleChoisieNum);
-		this.algorithmes.get(algoChoosed).setCle(new String(this.cleChoisieStr));
 		
 		//System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
 		
