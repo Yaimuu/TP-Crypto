@@ -64,13 +64,26 @@ public class Cle
 				tempTable[j] = (char)(k+'A');
 				//System.out.println(tempTable[counter]);
 				cleReturn[nbTurn] = tempTable;
-				System.out.println(cleReturn[nbTurn]);
+				//System.out.println(cleReturn[nbTurn]);
 				nbTurn++;
 				//System.out.println(tempTable);
 			}
 			tempTable[j] = lastChar;
 		}
 		return cleReturn;
+	}
+	
+	public static char[] cleRearrangee(char[] cle) {
+		int random1 = (int)(Math.random() * 100);
+		int random2 = (int)(Math.random() * 100);
+		char tempChar;
+		while(random2%cle.length == random1%cle.length) {
+			random2 = (int)(Math.random() * 100);
+		}
+		tempChar = cle[(random1)%cle.length];
+		cle[(random1)%cle.length] =  cle[(random2)%cle.length];
+		cle[(random2)%cle.length] =  tempChar;
+		return cle;	
 	}
 	
 }

@@ -68,14 +68,18 @@ public class Server
 		
 		char[][] clesTests = Cle.clesMutees(this.cleChoisieStr);
 		
-		String charact = "";
+		char[] cleSwap = Cle.cleRearrangee(this.cleChoisieStr);
+		
+		System.out.println(cleSwap);
+		
+		/*String charact = "";
 		for (char[] clesComb: clesTests) {
 		    for (char item: clesComb) {
 		        charact += item;
 		    }
 		    System.out.println(charact+"\n");
 		    charact = "";
-		}
+		}*/
 		
 		/*char[] testchars = {'A', 'A', 'A', 'A'};
 		char[][] testcharsTable = new char[testchars.length*26][testchars.length];
