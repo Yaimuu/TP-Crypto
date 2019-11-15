@@ -17,6 +17,11 @@ public class Cle
 	
 	public static char[] obtenirCleCar(int nbCars)
 	{
+		if(nbCars == 26)
+		{
+			return obtenirCleAlphabet();
+		}
+		
 		char[] key = new char[nbCars];
 		
 		for(int i = 0; i < nbCars; i++)

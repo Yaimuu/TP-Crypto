@@ -66,7 +66,7 @@ public class Server
 		
 		for(String line : text)
 		{
-			newText.add(this.algorithmes.get(algoChoosed).encode(line));
+			newText.add(this.algorithmes.get(algoChoosed).decode(this.algorithmes.get(algoChoosed).encode(line)));
 		}
 		
 		return newText;
