@@ -19,6 +19,8 @@ public class Server
 	private ArrayList<Crypto> algorithmes;
 	private int rand;
 	private int algoChoosed;
+	public static int TENTATIVE_DE_SOUMMISSION = 0;
+	private static int MAX_SOUMISSION = 10;
 
 	public Server(String fileName) throws IOException 
 	{
@@ -62,7 +64,44 @@ public class Server
 		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
-		//System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
+		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
+		
+		char[][] clesTests = Cle.clesMutees(this.cleChoisieStr);
+		
+		String charact = "";
+		for (char[] clesComb: clesTests) {
+		    for (char item: clesComb) {
+		        charact += item;
+		    }
+		    System.out.println(charact+"\n");
+		    charact = "";
+		}
+		
+		/*char[] testchars = {'A', 'A', 'A', 'A'};
+		char[][] testcharsTable = new char[testchars.length*26][testchars.length];
+		
+		int alphabet = 0;
+		String charact = "";
+		char actualChar = 'A';
+		int counter = 0;
+		int nbTurn = 0;
+		char[] tempTable = testchars;
+		for(int i = 0; i < testchars.length*26; i++) {
+			
+			
+		}
+		
+		for(int j = 0; j < testchars.length; j++) {
+			for(int k = 0; k < 26; k++) {
+				tempTable[j] = (char)(k+'A');
+				//System.out.println(tempTable[counter]);
+				testcharsTable[nbTurn] = tempTable;
+				nbTurn++;
+				System.out.println(tempTable);
+			}
+			tempTable[j] = 'A';
+		}*/
+		
 		
 		for(String line : text)
 		{
@@ -79,6 +118,7 @@ public class Server
 	
 	public boolean soumettreCle(String cle)
 	{
+		this.TENTATIVE_DE_SOUMMISSION += 1;
 		return this.cleChoisieStr == cle.toCharArray();
 	}
 	

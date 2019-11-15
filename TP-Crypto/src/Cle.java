@@ -13,6 +13,8 @@ public class Cle
 	public static final int MIN_LOW = 97;
 	public static final int MAX_LOW = 122;
 	
+	
+	
 	public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
 	public static char[] obtenirCleCar(int nbCars)
@@ -49,6 +51,26 @@ public class Cle
 		}
 		
 		return alphabetRes;
+	}
+	
+	public static char[][] clesMutees(char[] cle){
+		char[] tempTable = cle;
+		char[][] cleReturn = new char[cle.length*26][cle.length];
+		int nbTurn = 0;
+		char lastChar = 'A';
+		for(int j = 0; j < cle.length; j++) {
+			lastChar = tempTable[j];
+			for(int k = 0; k < 26; k++) {
+				tempTable[j] = (char)(k+'A');
+				//System.out.println(tempTable[counter]);
+				cleReturn[nbTurn] = tempTable;
+				System.out.println(cleReturn[nbTurn]);
+				nbTurn++;
+				//System.out.println(tempTable);
+			}
+			tempTable[j] = lastChar;
+		}
+		return cleReturn;
 	}
 	
 }

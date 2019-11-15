@@ -13,7 +13,7 @@ public class Main
 		Server s = new Server("Shakespeare.txt");
 		for (String string : s. obtenirFichierEncode())
 		{
-			System.out.println(string);
+			//System.out.println(string);
 		}
 	}
 }
