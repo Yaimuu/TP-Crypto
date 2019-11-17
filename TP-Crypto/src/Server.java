@@ -44,10 +44,16 @@ public class Server
 		
 		rand = (int)(Math.random() * Cle.alphabet.length + 1);
 		
-		algoChoosed = rand % this.algorithmes.size();
+		this.algoChoosed = rand % this.algorithmes.size();
+		this.algoChoosed = 3;
 		
 		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
+		
+		if(this.algorithmes.get(this.algoChoosed) instanceof Dico)
+		{
+			this.cleChoisieStr = Cle.obtenirCleCar(26);
+		}
 		
 		for(Crypto algo : this.algorithmes)
 		{
@@ -60,7 +66,7 @@ public class Server
 	{
 		ArrayList<String> newText = new ArrayList<String>();
 		
-		//algoChoosed = 3;
+		
 		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
@@ -69,13 +75,14 @@ public class Server
 		
 		Xor test = new Xor();
 		String keyy = "";
-		for(int i = 0; i < this.cleChoisieStr.length; i++) {
+		for(int i = 0; i < this.cleChoisieStr.length; i++) 
+		{
 			keyy += this.cleChoisieStr[i];
 		}
 		System.out.println(keyy);
 		test.setCle(keyy);
-		System.out.println(test.encode("OUIIiiiIII"));
-		System.out.println(test.decode(test.encode("OUIIiiiIII")));
+		System.out.println(test.encode("YanisEstLSDQDSQDSDePlusBeau"));
+		System.out.println(test.decode(test.encode("YanisEstLSDQDSQDSDePlusBeau")));
 		
 		char[][] clesTests = Cle.clesMutees(this.cleChoisieStr);
 		

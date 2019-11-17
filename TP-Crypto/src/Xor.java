@@ -37,16 +37,8 @@ public class Xor implements Crypto
 		for(int i = 0; i < Crypto.characterVector.size(); i++)
 		{
 			
-			char newChar = (char)((this.cle.charAt(i % this.cle.length()) ^ message.charAt(i)) % 26);
+			char newChar = (char)((this.cle.charAt(i % this.cle.length()) ^ message.charAt(i)) );
 			
-			if(message.charAt(i) >= Cle.MIN_LOW)
-			{
-				newChar += Cle.MIN_LOW;
-			}
-			else
-			{
-				newChar += Cle.MIN_UP;
-			}
 			
 			Crypto.characterVector.set( i, newChar);
 		}
@@ -65,16 +57,9 @@ public class Xor implements Crypto
 		for(int i = 0; i < Crypto.characterVector.size(); i++)
 		{
 			
-			char newChar = (char)((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())) % 26);
+			char newChar = (char)((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())) );
 			//System.out.println((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())));
-			if(message.charAt(i) >= Cle.MIN_LOW)
-			{
-				newChar += Cle.MIN_LOW;
-			}
-			else
-			{
-				newChar += Cle.MIN_UP;
-			}
+			
 			
 			Crypto.characterVector.set( i, newChar);
 		}

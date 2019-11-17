@@ -150,10 +150,42 @@ public class Decodeur
 				}
 				if(scoreOuLogic > 600) {
 					total += 1;
-					
+					char[][] cleMutees = Cle.clesMutees(getCle);
+					for(int k = 0; k < cleMutees.length; k++) {
+						Crypto XorMutee = new Xor();
+						XorMutee.setCle(new String(cleMutees[k]));
+						double scoreOuLogicMute = 0.0;
+						for(int s = 0; s < phrasesEncodees.size(); s++) {
+							scoreOuLogicMute += calculScore(XorMutee.decode(phrasesEncodees.get(s)));
+						}
+						if(scoreOuLogicMute > scoreOuLogic) {
+							scoreOuLogic = scoreOuLogicMute;
+							getCle = cleMutees[j];
+						}
+						results.get(1).ajoute(new String(getCle), scoreOuLogic);
+						
+					}
+				}
+				if(scoreDecaleEnColonne > 600) {
+					total += 1;
+					char[][] cleMutees = Cle.clesMutees(getCle);
+					for(int k = 0; k < cleMutees.length; k++) {
+						Crypto VigenereMutee = new Vigenere();
+						VigenereMutee.setCle(new String(cleMutees[k]));
+						double scoreDecaleEnConlonneMute = 0.0;
+						for(int s = 0; s < phrasesEncodees.size(); s++) {
+							scoreDecaleEnConlonneMute += calculScore(VigenereMutee.decode(phrasesEncodees.get(s)));
+						}
+						if(scoreDecaleEnConlonneMute > scoreDecaleEnColonne) {
+							scoreDecaleEnColonne = scoreDecaleEnConlonneMute;
+							getCle = cleMutees[j];
+						}
+						results.get(1).ajoute(new String(getCle), scoreDecaleEnColonne);
+					}
 				}
 				
 			}
+			total = 0;
 		}
 		
 		return results;
@@ -161,7 +193,26 @@ public class Decodeur
 	
 	public Resultat trouveDictionnaire(ArrayList<String> phrasesEncodees, int scoreTotal)
 	{
-		Resultat result = new Resultat("");
+		int i = 0;
+		char[] createCle = Cle.obtenirCleCar(26);
+		Crypto dictionnaire = new Dico();
+		dictionnaire.setCle(new String(createCle));
+		Resultat result = new Resultat("Dico");
+		double score = 0.0;
+		do {
+			char[] cleRearangee = Cle.cleRearrangee(createCle);
+			double scoreRearange = 0.0;
+			for(int j = 0; j < phrasesEncodees.size(); j++) {
+				scoreRearange += calculScore(dictionnaire.decode(phrasesEncodees.get(j)));
+			}
+			if(score < scoreRearange) {
+				score = scoreRearange;
+				createCle = cleRearangee;
+			}
+			if(score > 600) {
+				result.ajoute(new String(createCle), score);
+			}
+		} while(score < scoreTotal);
 		return result;
 	}
 	

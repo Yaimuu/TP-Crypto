@@ -44,15 +44,15 @@ public class Cle
 	public static char[] obtenirCleAlphabet()
 	{
 		Random rgen = new Random();  // Random number generator			
-		char[] alphabetRes = Cle.alphabet;
+		char[] alphabetRes = Cle.alphabet.clone();
 		
-		for (int i = 0; i < alphabetRes.length; i++) 
+		for (int i = 0; i < Cle.alphabet.length; i++) 
 		{
 		    int randomPosition = rgen.nextInt(alphabetRes.length);
 		    int temp = alphabetRes[i];
-		    
-		    alphabetRes[randomPosition] = (char) temp;
 		    alphabetRes[i] = alphabetRes[randomPosition];
+		    alphabetRes[randomPosition] = (char) temp;
+		    
 		}
 		
 		return alphabetRes;
