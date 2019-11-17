@@ -14,8 +14,6 @@ public class Cle
 	public static final int MIN_LOW = 97;	// Correspond au code ascii de 'a'
 	public static final int MAX_LOW = 122;	// Correspond au code ascii de 'z'
 	
-	
-	
 	public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
 	public static char[] obtenirCleCar(int nbCars)

@@ -40,8 +40,6 @@ public class Main
 			}
 		}
 		
-		
-		
 		if(!isKeyNum)
 		{
 			System.out.println("Aucune clé numérique n'a été trouvée !");
@@ -81,8 +79,6 @@ public class Main
 						isKeyDico = true;
 					}
 				}
-				
-				
 			}
 		}
 		
