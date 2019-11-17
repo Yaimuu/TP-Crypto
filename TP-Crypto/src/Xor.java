@@ -66,6 +66,5 @@ public class Xor implements Crypto
 	public String obtenirNomAlgo() 
 	{
 		return "Chiffre XOR";
-		
 	}
 }

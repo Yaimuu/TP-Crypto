@@ -16,7 +16,10 @@ public class Resultat
 	{
 		this.algo = algo;
 	}
-
+	
+	/*
+	 * Permet d'ajouter une clé alphabétique au résultat
+	 */
 	public void ajoute(String cle, double score) 
 	{
 		cles.add(cle);
@@ -24,13 +27,19 @@ public class Resultat
 		trierListes();
 	}
 	
+	/*
+	 * Permet d'ajouter une clé numérique au résultat
+	 */
 	public void ajoute(int cle, double score) 
 	{
 		cles.add(cle);
 		scores.add(score);
 		trierListes();
 	}
-
+	
+	/*
+	 * Getters / Setters
+	 */
 	public String getAlgo() 
 	{
 		return algo;

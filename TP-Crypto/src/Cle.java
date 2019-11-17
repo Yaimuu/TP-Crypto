@@ -16,9 +16,12 @@ public class Cle
 	
 	public static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
+	/*
+	 * Permet d'obtenir une clé composée de caractères
+	 */
 	public static char[] obtenirCleCar(int nbCars)
 	{
-		if(nbCars == 26)
+		if(nbCars == Cle.alphabet.length)
 		{
 			return obtenirCleAlphabet();
 		}
@@ -27,19 +30,25 @@ public class Cle
 		
 		for(int i = 0; i < nbCars; i++)
 		{
-			int random = (int)(Math.random() * alphabet.length + 1);
+			int random = (int)(Math.random() * Cle.alphabet.length + 1);
 			key[i] = alphabet[random-1];
 		}
 		
 		return key;
 	}
 	
+	/*
+	 * Permet d'obtenir une clé numérique
+	 */
 	public static int obtenirCleNum(int max)
 	{
 		int random = (int)(Math.random() * max + 2);
 		return random;
 	}
 	
+	/*
+	 * Permet d'obtenir une clé alphabétique (En mélangeant l'alphabet)
+	 */
 	public static char[] obtenirCleAlphabet()
 	{
 		Random rgen = new Random();  // Random number generator			
@@ -57,6 +66,9 @@ public class Cle
 		return alphabetRes;
 	}
 	
+	/*
+	 * Reçoit une clé sous forme de tableau de caractères et retourne un tableau à deux dimensions de caractères.
+	 */
 	public static char[][] clesMutees(char[] cle){
 		char[] tempTable = cle;
 		char[][] cleReturn = new char[cle.length*26][cle.length];
@@ -78,6 +90,10 @@ public class Cle
 		return cleReturn;
 	}
 	
+	/*
+	 * reçoit une clé sous forme de tableau de caractères et échange deux des caractères de la clé au hasard. 
+	 * La clé réarrangée est ensuite retournée.
+	 */
 	public static char[] cleRearrangee(char[] cle) 
 	{
 		int random1 = (int)(Math.random() * 100);

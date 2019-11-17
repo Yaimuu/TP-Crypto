@@ -40,8 +40,6 @@ public class Server
 		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
 		
-		
-		
 		this.algorithmes = new ArrayList<Crypto>();
 		this.algorithmes.add(new Ceeeeaaaasaaaaaarrr(cleChoisieNum));
 		this.algorithmes.add(new Vigenere(new String(cleChoisieStr)));
@@ -64,7 +62,10 @@ public class Server
 			}
 		}
 	}
-
+	
+	/*
+	 * Encode le fichier contenu dans le serveur
+	 */
 	public ArrayList<String> obtenirFichierEncode() 
 	{
 		ArrayList<String> newText = new ArrayList<String>();
@@ -81,17 +82,26 @@ public class Server
 		return newText;
 	}
 	
+	/*
+	 * Permet de valider la phrase passée en paramètre
+	 */
 	public boolean soumettrePhrase(String phrase, int indice)
 	{
 		return this.text.get(indice) == phrase;
 	}
 	
+	/*
+	 * Permet de valider la clé alphabétique passée en paramètre
+	 */
 	public boolean soumettreCle(String cle)
 	{
 		Server.TENTATIVE_DE_SOUMMISSION += 1;
 		return this.cleChoisieStr == cle.toCharArray();
 	}
 	
+	/*
+	 * Permet de valider la clé numérique passée en paramètre
+	 */
 	public boolean soumettreCle(int cle)
 	{
 		return this.cleChoisieNum == cle;

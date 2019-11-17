@@ -20,8 +20,11 @@ public class Decodeur
 	final int SUITE = 0 ; //case qui contiendra la suite de lettres
 	final int FREQUENCE = 1 ; //case qui contiendra la fréquence
 	
-	private Map<String, Double> frequences = new HashMap<String, Double>();;
+	private Map<String, Double> frequences = new HashMap<String, Double>();
 	
+	/*
+	 * Constructeur de la classe
+	 */
 	public Decodeur(String fileName) throws IOException 
 	{
 		File file = new File("./" + fileName);
@@ -37,6 +40,9 @@ public class Decodeur
 		br.close();
 	}
 	
+	/*
+	 * Calcule le score d’une phrase en utilisant les suites de quatre lettres que le constructeur a ajouté dans la HashMap fréquences.
+	 */
 	public double calculScore(String phrase)
 	{
 		double score = 0;
@@ -53,6 +59,9 @@ public class Decodeur
 		return score;
 	}
 	
+	/*
+	 * Utilise la distribution des lettres des phrases encodées pour déterminer la longueur de la clé utilisée lors de l’encodage
+	 */
 	public ArrayList<Integer> calculLongueurCle(String texte, int max)
 	{
 		ArrayList<Integer> longueurPossible = new ArrayList<Integer>();
@@ -77,6 +86,9 @@ public class Decodeur
 		return longueurPossible;
 	}
 	
+	/*
+	 * Calcule la fréquence des groupements de 4 lettres contenues dans le fichier associé, contenus dans le String s
+	 */
 	public double calculeFrequence(String s) 
 	{
 		Map<Integer, Integer> lettres = new HashMap<Integer, Integer>();
@@ -113,6 +125,9 @@ public class Decodeur
 		return total;
 	}
 	
+	/*
+	 * tente de trouver une clé numérique qui aurait été utilisée dans le cadre d’un encodage de type César.
+	 */
 	public Resultat trouveCleNumerique(ArrayList<String> phrasesEncodees, int max)
 	{
 		Resultat cesarResultat = new Resultat("Chiffre de César");
@@ -125,16 +140,19 @@ public class Decodeur
 			{
 				score += calculScore(cesar.decode(phrase));
 			}
-			//System.out.println("score : " + score);
+			
 			if(score >= 300)
 			{
-				//System.out.println(i);
 				cesarResultat.ajoute(i, score);
 			}
 		}
 		return cesarResultat;
 	}
 	
+	/*
+	 * Décode les phrases encodées avec toutes les clés entre 0 et max et 
+	 * détermine si les phrases décodées ressemblent à de l’anglais via la méthode calculScore.
+	 */
 	public ArrayList<Resultat> trouveClePhrase(ArrayList<String> phrasesEncodees, int max)
 	{
 		ArrayList<Resultat> results = new ArrayList<Resultat>();
@@ -230,6 +248,9 @@ public class Decodeur
 		return results;
 	}
 	
+	/*
+	 * Permet de casser un encodage fait avec l’algorithme du dictionnaire.
+	 */
 	public Resultat trouveDictionnaire(ArrayList<String> phrasesEncodees, int scoreTotal)
 	{
 		char[] createCle = Cle.obtenirCleCar(26);

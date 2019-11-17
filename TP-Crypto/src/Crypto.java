@@ -16,6 +16,9 @@ public interface Crypto
 	public void setCle(String cle);
 	public String obtenirNomAlgo();
 	
+	/*
+	 * Permet de charger le message passé en paramètre dans le vecteur de caractères
+	 */
 	default void loadMessage(String message)
 	{
 		for(int i = 0; i < message.length(); i++)
@@ -24,6 +27,9 @@ public interface Crypto
 		}
 	}
 	
+	/*
+	 * Permet de transformer le vecteur de caractères en String
+	 */
 	default String vectorToString()
 	{
 		String message = "";
