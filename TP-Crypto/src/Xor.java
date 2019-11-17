@@ -30,7 +30,29 @@ public class Xor implements Crypto
 	@Override
 	public String decode(String message) 
 	{
-		// TODO Auto-generated method stub
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			
+			char newChar = (char)((this.cle.charAt(i % this.cle.length()) ^ message.charAt(i)) % 26);
+			
+			if(message.charAt(i) >= Cle.MIN_LOW)
+			{
+				newChar += Cle.MIN_LOW;
+			}
+			else
+			{
+				newChar += Cle.MIN_UP;
+			}
+			
+			Crypto.characterVector.set( i, newChar);
+		}
+		
+		message = this.vectorToString();
+		
 		return message;
 	}
 
@@ -40,12 +62,11 @@ public class Xor implements Crypto
 		Crypto.characterVector.clear();
 		this.loadMessage(message);
 		
-		
 		for(int i = 0; i < Crypto.characterVector.size(); i++)
 		{
 			
 			char newChar = (char)((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())) % 26);
-			
+			//System.out.println((message.charAt(i) ^ this.cle.charAt(i % this.cle.length())));
 			if(message.charAt(i) >= Cle.MIN_LOW)
 			{
 				newChar += Cle.MIN_LOW;

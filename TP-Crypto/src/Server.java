@@ -66,18 +66,26 @@ public class Server
 		
 		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
 		
+		
+		Xor test = new Xor();
+		String keyy = "";
+		for(int i = 0; i < this.cleChoisieStr.length; i++) {
+			keyy += this.cleChoisieStr[i];
+		}
+		System.out.println(keyy);
+		test.setCle(keyy);
+		System.out.println(test.encode("OUIIiiiIII"));
+		System.out.println(test.decode(test.encode("OUIIiiiIII")));
+		
 		char[][] clesTests = Cle.clesMutees(this.cleChoisieStr);
 		
 		char[] cleSwap = Cle.cleRearrangee(this.cleChoisieStr);
 		
-		System.out.println(cleSwap);
+		//System.out.println(cleSwap);
 		
-		/*String charact = "";
-		for (char[] clesComb: clesTests) {
-		    for (char item: clesComb) {
-		        charact += item;
-		    }
-		    System.out.println(charact+"\n");
+		String charact = "";
+		/*for (int i = 0; i < clesTests.length; i++) {
+		    System.out.println(clesTests[i]);
 		    charact = "";
 		}*/
 		

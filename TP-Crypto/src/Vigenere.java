@@ -30,7 +30,31 @@ public class Vigenere implements Crypto
 	@Override
 	public String decode(String message)
 	{
-		// TODO Auto-generated method stub
+		Crypto.characterVector.clear();
+		this.loadMessage(message);
+		
+		for(int i = 0; i < Crypto.characterVector.size(); i++)
+		{
+			int digit = 0;
+			int keyDigit = this.cle.charAt(i % (this.cle.length())) - Cle.MIN_UP;
+			int newDigit = 0;
+			
+			if(message.charAt(i) >= Cle.MIN_LOW) 
+			{
+				digit = message.charAt(i) - Cle.MIN_LOW;
+				newDigit = (digit - keyDigit + 26) % 26 + Cle.MIN_LOW;
+			}
+			else 
+			{
+				digit = message.charAt(i) - Cle.MIN_UP;
+				newDigit = (digit - keyDigit + 26) % 26 + Cle.MIN_UP;
+			}
+			
+			Crypto.characterVector.set( i, (char)( newDigit ));
+		}
+		
+		message = this.vectorToString();
+		
 		return message;
 	}
 
@@ -68,7 +92,8 @@ public class Vigenere implements Crypto
 	@Override
 	public String obtenirNomAlgo() 
 	{
-		return "Chiffre de Vigenère";
+		return "Vigenere";
+		//return "Chiffre de Vigenère";
 		
 	}
 }

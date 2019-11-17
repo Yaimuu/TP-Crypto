@@ -121,6 +121,41 @@ public class Decodeur
 	public ArrayList<Resultat> trouveClePhrase(ArrayList<String> phrasesEncodees, int max)
 	{
 		ArrayList<Resultat> results = new ArrayList<Resultat>();
+		results.add(new Resultat("Vigenere"));
+		results.add(new Resultat("Xor"));
+		String texteEncode = "";
+		for(int i = 0; i < phrasesEncodees.size(); i++) {
+			texteEncode += phrasesEncodees.get(i);
+		}
+		ArrayList<Integer> longueurPossible = calculLongueurCle(texteEncode, max);
+		
+		for(int j = 0; j < longueurPossible.size(); j++) {
+			int total = 0;
+			while(total < max) {
+				double scoreDecaleEnColonne = 0.0;
+				double scoreOuLogic = 0.0;
+				char[] getCle = Cle.obtenirCleCar(1);
+				String finalCle = "";
+				for(int k = 0; k < getCle.length; k++) {
+					finalCle += getCle[k];
+				}
+				Crypto Vigenere = new Vigenere();
+				Vigenere.setCle(finalCle);
+				Crypto Xor = new Xor();
+				Xor.setCle(finalCle);
+				
+				for(int o = 0; o < phrasesEncodees.size(); o++) {
+					scoreOuLogic += calculScore(Xor.decode(phrasesEncodees.get(o)));
+					scoreDecaleEnColonne += calculScore(Vigenere.decode(phrasesEncodees.get(o)));
+				}
+				if(scoreOuLogic > 600) {
+					total += 1;
+					
+				}
+				
+			}
+		}
+		
 		return results;
 	}
 	

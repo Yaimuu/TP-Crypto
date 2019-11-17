@@ -63,26 +63,29 @@ public class Cle
 		char[][] cleReturn = new char[cle.length*26][cle.length];
 		int nbTurn = 0;
 		char lastChar = 'A';
-		for(int j = 0; j < cle.length; j++) {
+		for(int j = 0; j < cle.length; j++) 
+		{
 			lastChar = tempTable[j];
-			for(int k = 0; k < 26; k++) {
+			for(int k = 0; k < 26; k++) 
+			{
 				tempTable[j] = (char)(k+'A');
-				//System.out.println(tempTable[counter]);
-				cleReturn[nbTurn] = tempTable;
-				//System.out.println(cleReturn[nbTurn]);
+				cleReturn[nbTurn] = tempTable.clone();
 				nbTurn++;
-				//System.out.println(tempTable);
 			}
-			tempTable[j] = lastChar;
+			tempTable[j] = lastChar;	
+			
 		}
+		
 		return cleReturn;
 	}
 	
-	public static char[] cleRearrangee(char[] cle) {
+	public static char[] cleRearrangee(char[] cle) 
+	{
 		int random1 = (int)(Math.random() * 100);
 		int random2 = (int)(Math.random() * 100);
 		char tempChar;
-		while(random2%cle.length == random1%cle.length) {
+		while(random2%cle.length == random1%cle.length) 
+		{
 			random2 = (int)(Math.random() * 100);
 		}
 		tempChar = cle[(random1)%cle.length];
