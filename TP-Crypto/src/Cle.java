@@ -8,10 +8,11 @@ import java.util.Random;
 
 public class Cle 
 {
-	public static final int MIN_UP = 65;
-	public static final int MAX_UP = 90;
-	public static final int MIN_LOW = 97;
-	public static final int MAX_LOW = 122;
+	
+	public static final int MIN_UP = 65; 	// Correspond au code ascii de 'A'
+	public static final int MAX_UP = 90;	// Correspond au code ascii de 'Z'
+	public static final int MIN_LOW = 97;	// Correspond au code ascii de 'a'
+	public static final int MAX_LOW = 122;	// Correspond au code ascii de 'z'
 	
 	
 	

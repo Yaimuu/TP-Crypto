@@ -1,6 +1,6 @@
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 2.0
  * Fichier : Vigenere.java - Classe implémentant l'algorithme de Vigenère (Algorithme de decaleEnColonne)
  */
 
@@ -15,16 +15,12 @@ public class Vigenere implements Crypto
 	}
 
 	@Override
-	public void setCle(int cle) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void setCle(int cle) { /* Ne fait rien*/ }
 
-	public Vigenere() 
+	public Vigenere(String cle) 
 	{
-		super();
-		// TODO Auto-generated constructor stub
+		
+		this.setCle(cle);
 	}
 
 	@Override

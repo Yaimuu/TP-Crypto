@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,11 +27,13 @@ public class Decodeur
 		File file = new File("./" + fileName);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st;
+		
 		while ((st = br.readLine()) != null) 
 		{
 			String[] parties = st.split(ESPACE);
-			this.frequences.put(parties[SUITE], Math.log(Double.valueOf(parties[FREQUENCE])) );
+			this.frequences.put(parties[SUITE], Math.log10(Double.valueOf(parties[FREQUENCE])) );
 		}
+		
 		br.close();
 	}
 	
@@ -44,7 +45,7 @@ public class Decodeur
 			String key = entry.getKey();
 		    Double value = entry.getValue();
 		    
-		    if(phrase.contains(key))
+		    if(phrase.toUpperCase().contains(key))
 		    {
 		    	score += value;
 		    }
@@ -59,11 +60,14 @@ public class Decodeur
 		for(int i = 0; i < max; i++)
 		{
 			String lettresANDansTexte = "";
+			
 			for(int j = 0; j < texte.length(); j+=i)
 			{
 				lettresANDansTexte += texte.charAt(j);
 			}
+			
 			double score = calculeFrequence(lettresANDansTexte);
+			
 			if(Math.abs(score - 0.06) < 0.007)
 			{
 				longueurPossible.add(i);
@@ -80,22 +84,32 @@ public class Decodeur
 		double somme = 0.0;
 		double total = 0.0;
 		s = s.toUpperCase();
-		for (int i = 0; i < s.length(); i++) {
-		Integer nombrePrecedent = lettres.get(s.charAt(i) - 65);
-		if (nombrePrecedent == null) {
-		nombrePrecedent = 0;
+		
+		for (int i = 0; i < s.length(); i++) 
+		{
+			Integer nombrePrecedent = lettres.get(s.charAt(i) - 65);
+			
+			if (nombrePrecedent == null) 
+			{
+				nombrePrecedent = 0;
+			}
+			
+			lettres.put(new Integer(s.charAt(i) - 65),
+			nombrePrecedent + 1);
+			n++;
 		}
-		lettres.put(new Integer(s.charAt(i) - 65),
-		nombrePrecedent + 1);
-		n++;
-		}
+		
 		Iterator<Entry<Integer, Integer>> it =
 		lettres.entrySet().iterator();
-		while (it.hasNext()) {
-		Map.Entry<Integer, Integer> pair = it.next();
-		somme = somme + (pair.getValue() * (pair.getValue() - 1));
+		
+		while (it.hasNext()) 
+		{
+			Map.Entry<Integer, Integer> pair = it.next();
+			somme = somme + (pair.getValue() * (pair.getValue() - 1));
 		}
+		
 		total = somme / (n * (n - 1));
+		
 		return total;
 	}
 	
@@ -104,14 +118,17 @@ public class Decodeur
 		Resultat cesarResultat = new Resultat("Chiffre de César");
 		for(int i = 0; i < max; i++)
 		{
-			Ceeeeaaaasaaaaaarrr cesar = new Ceeeeaaaasaaaaaarrr();
+			Ceeeeaaaasaaaaaarrr cesar = new Ceeeeaaaasaaaaaarrr(i);
 			double score = 0;
+			
 			for(String phrase : phrasesEncodees)
 			{
-				score += calculScore(phrase);
+				score += calculScore(cesar.decode(phrase));
 			}
+			//System.out.println("score : " + score);
 			if(score >= 300)
 			{
+				//System.out.println(i);
 				cesarResultat.ajoute(i, score);
 			}
 		}
@@ -124,54 +141,76 @@ public class Decodeur
 		results.add(new Resultat("Vigenere"));
 		results.add(new Resultat("Xor"));
 		String texteEncode = "";
-		for(int i = 0; i < phrasesEncodees.size(); i++) {
+		
+		for(int i = 0; i < phrasesEncodees.size(); i++) 
+		{
 			texteEncode += phrasesEncodees.get(i);
 		}
+		
 		ArrayList<Integer> longueurPossible = calculLongueurCle(texteEncode, max);
 		
-		for(int j = 0; j < longueurPossible.size(); j++) {
+		for(int j = 0; j < longueurPossible.size(); j++) 
+		{
 			int total = 0;
-			while(total < max) {
+			
+			while(total < max) 
+			{
 				double scoreDecaleEnColonne = 0.0;
 				double scoreOuLogic = 0.0;
-				char[] getCle = Cle.obtenirCleCar(1);
+				char[] getCle = Cle.obtenirCleCar(longueurPossible.get(j));
 				String finalCle = "";
-				for(int k = 0; k < getCle.length; k++) {
+				
+				for(int k = 0; k < getCle.length; k++) 
+				{
 					finalCle += getCle[k];
 				}
-				Crypto Vigenere = new Vigenere();
-				Vigenere.setCle(finalCle);
-				Crypto Xor = new Xor();
-				Xor.setCle(finalCle);
 				
-				for(int o = 0; o < phrasesEncodees.size(); o++) {
+				Crypto Vigenere = new Vigenere(finalCle);
+				
+				Crypto Xor = new Xor(finalCle);
+				
+				
+				for(int o = 0; o < phrasesEncodees.size(); o++) 
+				{
 					scoreOuLogic += calculScore(Xor.decode(phrasesEncodees.get(o)));
 					scoreDecaleEnColonne += calculScore(Vigenere.decode(phrasesEncodees.get(o)));
 				}
-				if(scoreOuLogic > 600) {
+				
+				if(scoreOuLogic > 600) 
+				{
 					total += 1;
 					char[][] cleMutees = Cle.clesMutees(getCle);
-					for(int k = 0; k < cleMutees.length; k++) {
-						Crypto XorMutee = new Xor();
-						XorMutee.setCle(new String(cleMutees[k]));
+					
+					for(int k = 0; k < cleMutees.length; k++) 
+					{
+						Crypto XorMutee = new Xor(new String(cleMutees[k]));
+						
 						double scoreOuLogicMute = 0.0;
-						for(int s = 0; s < phrasesEncodees.size(); s++) {
+						
+						for(int s = 0; s < phrasesEncodees.size(); s++) 
+						{
 							scoreOuLogicMute += calculScore(XorMutee.decode(phrasesEncodees.get(s)));
 						}
-						if(scoreOuLogicMute > scoreOuLogic) {
+						
+						if(scoreOuLogicMute > scoreOuLogic) 
+						{
 							scoreOuLogic = scoreOuLogicMute;
 							getCle = cleMutees[j];
 						}
-						results.get(1).ajoute(new String(getCle), scoreOuLogic);
 						
+						results.get(1).ajoute(new String(getCle), scoreOuLogic);
 					}
 				}
-				if(scoreDecaleEnColonne > 600) {
+				
+				if(scoreDecaleEnColonne > 600) 
+				{
 					total += 1;
 					char[][] cleMutees = Cle.clesMutees(getCle);
-					for(int k = 0; k < cleMutees.length; k++) {
-						Crypto VigenereMutee = new Vigenere();
-						VigenereMutee.setCle(new String(cleMutees[k]));
+					
+					for(int k = 0; k < cleMutees.length; k++) 
+					{
+						Crypto VigenereMutee = new Vigenere(new String(cleMutees[k]));
+						
 						double scoreDecaleEnConlonneMute = 0.0;
 						for(int s = 0; s < phrasesEncodees.size(); s++) {
 							scoreDecaleEnConlonneMute += calculScore(VigenereMutee.decode(phrasesEncodees.get(s)));
@@ -193,26 +232,33 @@ public class Decodeur
 	
 	public Resultat trouveDictionnaire(ArrayList<String> phrasesEncodees, int scoreTotal)
 	{
-		int i = 0;
 		char[] createCle = Cle.obtenirCleCar(26);
-		Crypto dictionnaire = new Dico();
-		dictionnaire.setCle(new String(createCle));
+		Crypto dictionnaire = new Dico(new String(createCle));
+		
 		Resultat result = new Resultat("Dico");
 		double score = 0.0;
+		
 		do {
 			char[] cleRearangee = Cle.cleRearrangee(createCle);
 			double scoreRearange = 0.0;
-			for(int j = 0; j < phrasesEncodees.size(); j++) {
+			
+			for(int j = 0; j < phrasesEncodees.size(); j++) 
+			{
 				scoreRearange += calculScore(dictionnaire.decode(phrasesEncodees.get(j)));
 			}
-			if(score < scoreRearange) {
+			
+			if(score < scoreRearange) 
+			{
 				score = scoreRearange;
 				createCle = cleRearangee;
 			}
-			if(score > 600) {
+			if(score > 600) 
+			{
 				result.ajoute(new String(createCle), score);
 			}
+			
 		} while(score < scoreTotal);
+		
 		return result;
 	}
 	

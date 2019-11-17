@@ -22,38 +22,45 @@ public class Main
 			texteEncode.add(string);
 		}
 		
-		System.out.println("test");
+		System.out.println("Chargement, veuillez patienter...");
 		
 		Decodeur decodeur = new Decodeur("english_quadgrams.txt");
 		
-		Resultat resultNum = decodeur.trouveCleNumerique(texteEncode, 50);
+		Resultat resultNum = decodeur.trouveCleNumerique(texteEncode, 26);
 		
-		System.out.println("test2");
+		System.out.println("Nombre de clés numériques potentielles : " + resultNum.getCles().size());
 		
 		for(Object cle : resultNum.getCles())
 		{
-			if(s.soumettreCle((int)cle))
+			Double cleDouble = (Double)cle;
+			if(s.soumettreCle(cleDouble.intValue()))
 			{
-				System.out.println("Cle : " + cle + " Algo : " + resultNum.getAlgo());
+				System.out.println("Clé : " + cle + " Algo : " + resultNum.getAlgo());
 				isKeyNum = true;
 			}
 		}
 		
+		
+		
 		if(!isKeyNum)
 		{
-			ArrayList<Resultat> resultsPhrases = decodeur.trouveClePhrase(texteEncode, 200);
+			System.out.println("Aucune clé numérique n'a été trouvée !");
+			System.out.println("Recherche de clé alphabétique, veuillez patienter...");
+			
+			ArrayList<Resultat> resultsPhrases = decodeur.trouveClePhrase(texteEncode, 26);
 			int i = 0;
 			
 			for(Resultat result : resultsPhrases)
 			{
+				System.out.println("Nombre de clés alpha potentielles : " + result.getCles().size() + " pour l'algo " + result.getAlgo());
 				if(s.soumettreCle((String)result.getCles().get(i)))
 				{
-					System.out.println("Cle : " + result.getCles().get(i) + " Algo : " + result.getAlgo());
+					System.out.println("Clé : " + result.getCles().get(i) + " Algo : " + result.getAlgo());
 					isKeyPhrase = true;
 				}
 				i++;
 				
-				if(s.TENTATIVE_DE_SOUMMISSION < s.MAX_SOUMISSION)
+				if(Server.TENTATIVE_DE_SOUMMISSION < Server.MAX_SOUMISSION)
 				{
 					break;
 				}
@@ -61,24 +68,28 @@ public class Main
 			
 			if(!isKeyPhrase)
 			{
+				System.out.println("Aucune clé alphabétique n'a été trouvée !");
+				System.out.println("Recherche de clé dictionnaire, veuillez patienter...");
+				
 				Resultat resultDico = decodeur.trouveDictionnaire(texteEncode, 850);
 				
 				for(Object cle : resultDico.getCles())
 				{
 					if(s.soumettreCle((String)cle))
 					{
-						System.out.println("Cle : " + cle + " Algo : " + resultDico.getAlgo());
+						System.out.println("Clé : " + cle + " Algo : " + resultDico.getAlgo());
 						isKeyDico = true;
 					}
 				}
 				
-				if(!isKeyDico)
-				{
-					System.out.println("Aucune clé n'a été trouvée !");
-				}
+				
 			}
 		}
 		
+		if(!isKeyDico)
+		{
+			System.out.println("Aucune clé n'a été trouvée !");
+		}
 		
 	}
 }

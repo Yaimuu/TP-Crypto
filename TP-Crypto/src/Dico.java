@@ -1,6 +1,6 @@
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 2.0
  * Fichier : Dico.java - Classe implémentant l'algorithme du dictionnaire
  */
 
@@ -15,15 +15,12 @@ public class Dico implements Crypto
 	}
 	
 	@Override
-	public void setCle(int cle) 
-	{
-		// TODO Auto-generated method stub
-	}
+	public void setCle(int cle) { /* Ne fait rien*/ }
 
-	public Dico() 
+	public Dico(String cle) 
 	{
 		super();
-		// TODO Auto-generated constructor stub
+		this.setCle(cle);
 	}
 
 	@Override

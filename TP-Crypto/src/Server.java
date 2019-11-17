@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,29 +35,33 @@ public class Server
 		}
 		br.close();
 		
-		this.algorithmes = new ArrayList<Crypto>();
-		this.algorithmes.add(new Ceeeeaaaasaaaaaarrr());
-		this.algorithmes.add(new Vigenere());
-		this.algorithmes.add(new Xor());
-		this.algorithmes.add(new Dico());
-		
-		rand = (int)(Math.random() * Cle.alphabet.length + 1);
-		
-		this.algoChoosed = rand % this.algorithmes.size();
-		//this.algoChoosed = 3;
+		rand = (int)(Math.random() * 8 + 3);
 		
 		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
 		
+		
+		
+		this.algorithmes = new ArrayList<Crypto>();
+		this.algorithmes.add(new Ceeeeaaaasaaaaaarrr(cleChoisieNum));
+		this.algorithmes.add(new Vigenere(new String(cleChoisieStr)));
+		this.algorithmes.add(new Xor(new String(cleChoisieStr)));
+		this.algorithmes.add(new Dico(new String(cleChoisieStr)));
+		
+		this.algoChoosed = rand % this.algorithmes.size();
+		this.algoChoosed = 0;
+		
 		if(this.algorithmes.get(this.algoChoosed) instanceof Dico)
 		{
 			this.cleChoisieStr = Cle.obtenirCleCar(26);
-		}
-		
-		for(Crypto algo : this.algorithmes)
-		{
-			algo.setCle(this.cleChoisieNum);
-			algo.setCle(new String(this.cleChoisieStr));
+			for(Crypto algo : this.algorithmes)
+			{
+				Crypto newDico = new Dico(new String(this.cleChoisieStr));
+				if(algo.obtenirNomAlgo() == newDico.obtenirNomAlgo())
+				{
+					algo = newDico;
+				}
+			}
 		}
 	}
 
@@ -68,57 +71,7 @@ public class Server
 		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
-		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
-		
-		
-		/*Xor test = new Xor();
-		String keyy = "";
-		for(int i = 0; i < this.cleChoisieStr.length; i++) 
-		{
-			keyy += this.cleChoisieStr[i];
-		}
-		System.out.println(keyy);
-		test.setCle(keyy);
-		System.out.println(test.encode("YanisEstLSDQDSQDSDePlusBeau"));
-		System.out.println(test.decode(test.encode("YanisEstLSDQDSQDSDePlusBeau")));
-		
-		char[][] clesTests = Cle.clesMutees(this.cleChoisieStr);
-		
-		char[] cleSwap = Cle.cleRearrangee(this.cleChoisieStr);
-		
-		//System.out.println(cleSwap);
-		
-		String charact = "";*/
-		
-		/*for (int i = 0; i < clesTests.length; i++) {
-		    System.out.println(clesTests[i]);
-		    charact = "";
-		}*/
-		
-		/*char[] testchars = {'A', 'A', 'A', 'A'};
-		char[][] testcharsTable = new char[testchars.length*26][testchars.length];
-		
-		int alphabet = 0;
-		String charact = "";
-		char actualChar = 'A';
-		int counter = 0;
-		int nbTurn = 0;
-		char[] tempTable = testchars;
-		for(int i = 0; i < testchars.length*26; i++) {
-			
-			
-		}
-		
-		for(int j = 0; j < testchars.length; j++) {
-			for(int k = 0; k < 26; k++) {
-				tempTable[j] = (char)(k+'A');
-				//System.out.println(tempTable[counter]);
-				testcharsTable[nbTurn] = tempTable;
-				nbTurn++;
-				System.out.println(tempTable);
-			}
-			tempTable[j] = 'A';
-		}*/
+		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr) + " Algo : " + this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
 		
 		for(String line : text)
@@ -136,7 +89,7 @@ public class Server
 	
 	public boolean soumettreCle(String cle)
 	{
-		this.TENTATIVE_DE_SOUMMISSION += 1;
+		Server.TENTATIVE_DE_SOUMMISSION += 1;
 		return this.cleChoisieStr == cle.toCharArray();
 	}
 	
