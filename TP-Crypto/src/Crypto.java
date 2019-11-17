@@ -2,7 +2,7 @@ import java.util.Vector;
 
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 2.0
  * Fichier : Crypto.java - Interface implémentant les méthodes decode et encode
  */
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 4.0
  * Fichier : Server.java - Classe permettant de lire le le fichiers, il faut passer par elle pour encoder ou décoder le texte
  */
 

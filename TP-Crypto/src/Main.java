@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 2.0
  * Fichier : Main.java - Classe principale du programme, elle permet de lancer les algorithmes développés pour le projet
  */
 

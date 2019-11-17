@@ -2,7 +2,7 @@ import java.util.Random;
 
 /*
  * Auteur : Yanis Ouled Moussa, Justin Garcia
- * Version : 1.0
+ * Version : 3.0
  * Fichier : Cle.java - Classe permettant de générer une clé aléatoirement
  */
 
