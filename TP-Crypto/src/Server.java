@@ -20,7 +20,7 @@ public class Server
 	private int rand;
 	private int algoChoosed;
 	public static int TENTATIVE_DE_SOUMMISSION = 0;
-	private static int MAX_SOUMISSION = 10;
+	public static int MAX_SOUMISSION = 10;
 
 	public Server(String fileName) throws IOException 
 	{
@@ -45,7 +45,7 @@ public class Server
 		rand = (int)(Math.random() * Cle.alphabet.length + 1);
 		
 		this.algoChoosed = rand % this.algorithmes.size();
-		this.algoChoosed = 3;
+		//this.algoChoosed = 3;
 		
 		this.cleChoisieStr = Cle.obtenirCleCar(rand);
 		this.cleChoisieNum = Cle.obtenirCleNum(Cle.alphabet.length);
@@ -66,14 +66,12 @@ public class Server
 	{
 		ArrayList<String> newText = new ArrayList<String>();
 		
-		
-		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
 		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr));
 		
 		
-		Xor test = new Xor();
+		/*Xor test = new Xor();
 		String keyy = "";
 		for(int i = 0; i < this.cleChoisieStr.length; i++) 
 		{
@@ -90,7 +88,8 @@ public class Server
 		
 		//System.out.println(cleSwap);
 		
-		String charact = "";
+		String charact = "";*/
+		
 		/*for (int i = 0; i < clesTests.length; i++) {
 		    System.out.println(clesTests[i]);
 		    charact = "";

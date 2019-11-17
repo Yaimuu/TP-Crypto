@@ -12,11 +12,11 @@ public class Resultat
 	private ArrayList<Object> cles = new ArrayList<>();
 	private ArrayList<Double> scores = new ArrayList<Double>();
 	
-	
-	public Resultat(String algo) {
+	public Resultat(String algo) 
+	{
 		this.algo = algo;
 	}
-	
+
 	public void ajoute(String cle, double score) 
 	{
 		cles.add(cle);
@@ -41,12 +41,12 @@ public class Resultat
 		this.algo = algo;
 	}
 
-	public ArrayList getCles() 
+	public ArrayList<Object> getCles() 
 	{
 		return cles;
 	}
 
-	public void setCles(ArrayList cles) 
+	public void setCles(ArrayList<Object> cles) 
 	{
 		this.cles = cles;
 	}

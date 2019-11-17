@@ -101,7 +101,7 @@ public class Decodeur
 	
 	public Resultat trouveCleNumerique(ArrayList<String> phrasesEncodees, int max)
 	{
-		Resultat cesarResultat = new Resultat("Cesar");
+		Resultat cesarResultat = new Resultat("Chiffre de César");
 		for(int i = 0; i < max; i++)
 		{
 			Ceeeeaaaasaaaaaarrr cesar = new Ceeeeaaaasaaaaaarrr();
