@@ -71,8 +71,7 @@ public class Server
 		
 		newText.add(this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
-		System.out.println("Cles : " + this.cleChoisieNum + " - " + new String(this.cleChoisieStr) + " Algo : " + this.algorithmes.get(algoChoosed).obtenirNomAlgo());
-		
+		System.out.println("Cle numérique : " + this.cleChoisieNum + " - Cle alphabétique : " + new String(this.cleChoisieStr) + " - Algo utilisé : " + this.algorithmes.get(algoChoosed).obtenirNomAlgo());
 		
 		for(String line : text)
 		{
